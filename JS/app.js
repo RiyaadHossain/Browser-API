@@ -2,14 +2,22 @@
 const productInput = document.getElementById('product-input')
 const proContainer = document.getElementById('product-container')
 
-// Add Product Button 
+ 
 const addProduct = () => {
+   
+    //Add Product to cart
+    addtoCart(productInput.value)
+
+    productInput.value = ''
+}
+
+// Display Product in the UI
+const displayProduct = (pName) => {
     const item = document.createElement('p')
     item.classList.add('icon')
     item.classList.add('fs-4')
-    item.innerText = productInput.value
+    item.innerText = pName
     proContainer.appendChild(item)
-    productInput.value = ''
 }
 
 const getCart = () => {
@@ -21,4 +29,24 @@ const getCart = () => {
         cartObj = {}
     }
     return cartObj
+}
+
+const addtoCart = (item) => {
+    const cart = getCart()
+    if (cart[item] = 1) {
+        cart[item] += 1
+    } else {
+        cart[item] = 1
+    }
+
+    for (const x in cart) {
+        displayProduct(x)
+    }
+    // Display Product in the UI
+    // displayProduct(item)
+
+    const string = JSON.stringify(cart)
+    localStorage.setItem('cart', string)
+
+    
 }
