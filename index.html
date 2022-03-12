@@ -15,7 +15,7 @@
 
     <!-- Plain CSS -->
     <style>
-        .icon::before {
+        .lead::before {
           content: "➡️ ";
           font-size: 15px;
         }
@@ -32,11 +32,11 @@
           placeholder="I want to buy... 🩴"
         />
         <button
-          class="btn btn-info fw-bold"
+          class="btn btn-info "
           type="button"
           onclick="addProduct()"
         >
-          🅱️ Buy
+          🅱️ <span class="fw-bold">Buy</span>
         </button>
       </div>
       <div id="product-container"></div>

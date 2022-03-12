@@ -1,52 +1,59 @@
-// Global Variables
-const productInput = document.getElementById('product-input')
-const proContainer = document.getElementById('product-container')
+/* Document.getElementById */
+const byId = (id) => document.getElementById(id);
 
- 
-const addProduct = () => {
-   
-    //Add Product to cart
-    addtoCart(productInput.value)
+/* Product Container & List Item */
+const productDiv = byId("product-container");
 
-    productInput.value = ''
-}
-
-// Display Product in the UI
-const displayProduct = (pName) => {
-    const item = document.createElement('p')
-    item.classList.add('icon')
-    item.classList.add('fs-4')
-    item.innerText = pName
-    proContainer.appendChild(item)
-}
-
-const getCart = () => {
-    const cart = localStorage.getItem('cart');
-    let cartObj;
-    if (cart) {
-        cartObj = JSON.parse(cart)
-    } else {
-        cartObj = {}
-    }
-    return cartObj
-}
-
-const addtoCart = (item) => {
+const storedProduct = () => {
     const cart = getCart()
-    if (cart[item] = 1) {
-        cart[item] += 1
-    } else {
-        cart[item] = 1
+    for (const item in cart) {
+        showProduct(item)
     }
+};
 
-    for (const x in cart) {
-        displayProduct(x)
-    }
-    // Display Product in the UI
-    // displayProduct(item)
+/* --------------------------- Buy Button --------------------------- */
+const addProduct = () => {
+  const input = byId("product-input");
+  const product = input.value;
 
-    const string = JSON.stringify(cart)
-    localStorage.setItem('cart', string)
+  // Product in UI
+  showProduct(product);
+  input.value = "";
 
-    
-}
+  // Store in  Local Storage
+  storeLocal(product);
+};
+
+/* Function to Show products */
+const showProduct = (product) => {
+  const list = document.createElement("p");
+  list.classList.add("lead");
+  list.innerText = product;
+  productDiv.appendChild(list);
+};
+
+/* Function to Store products */
+const storeLocal = (product) => {
+  const cart = getCart();
+
+  if (cart[product]) {
+    cart[product] = cart[product] + 1;
+  } else {
+    cart[product] = 1;
+  }
+  const itemObj = JSON.stringify(cart);
+  localStorage.setItem("Cart Container", itemObj);
+};
+
+// Get the Cart From LocalStorage
+const getCart = () => {
+  let cart = localStorage.getItem("Cart Container");
+  if (cart) {
+    cart = JSON.parse(cart);
+  } else {
+    cart = {};
+  }
+  return cart;
+};
+
+storedProduct();
