@@ -1,3 +1,12 @@
+/* Enter Key */
+const btn = document.getElementById("product-input");
+btn.addEventListener("keyup", (event) => {
+  const keyPress = event.key;
+  if (keyPress === "Enter") {
+    document.getElementById("buy-btn").click();
+  }
+});
+
 /* Document.getElementById */
 const byId = (id) => document.getElementById(id);
 
@@ -5,10 +14,10 @@ const byId = (id) => document.getElementById(id);
 const productDiv = byId("product-container");
 
 const storedProduct = () => {
-    const cart = getCart()
-    for (const item in cart) {
-        showProduct(item)
-    }
+  const cart = getCart();
+  for (const item in cart) {
+    showProduct(item);
+  }
 };
 
 /* --------------------------- Buy Button --------------------------- */
